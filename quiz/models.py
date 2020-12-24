@@ -18,7 +18,7 @@ class Questions(models.Model):
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
-    mark = models.IntegerField()
+    
     
     
     
