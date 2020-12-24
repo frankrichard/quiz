@@ -1,0 +1,172 @@
+<html>
+<body class = "color">
+<style>
+.color{
+    background-color:aliceblue;
+}
+.tab
+{
+
+
+    border:1px solid black;
+    border-collapse:collapse;
+    width:400px
+    text-align:center
+    
+}
+th,td{
+    padding:15px;
+    border:1px solid black;
+    border-bottom:1px solid black;
+}
+tr{
+    border-vertical
+}
+.butt{
+    
+    
+    position: fixed;
+    bottom: 10px;
+    left: 100%;
+    margin-left: -104.5px;
+    
+    
+}
+.alignment{
+    top:100px;
+    left:100px;
+    position:absolute;
+
+}
+</style>
+<form action="/stuquestion/" method = "POST">
+    {% csrf_token %}
+
+
+{% if stud1 %}
+    <h3>welcome {{username}}</h3>
+    your answer will be displayed here once you finish the test
+    <table class = "tab" align = "center">
+        <tr>
+            <th>questions</th>
+            <th>your answer</th>
+            <th>correct answer</th>
+        </tr>
+        {% for st in stud1 %}
+        
+            <tr>
+                <td>{{st.stu_question}}</td>
+                <td>{{st.youranswer}}</td>
+                <td>{{st.crctans}}</td>
+            </tr>   
+        {% endfor %}
+    </table>
+    <div style = "text-align:center;">
+    <a>select the quiz you want to attend</a>
+    <br>
+    
+    {% for i in list1 %}
+        <a>quiz{{i}}</a>
+        <input type = "radio" id = "quiz1" name = "quiz1" value = "{{i}}" required>
+        <br>
+  
+    {% endfor %}
+    </div>
+    
+{% endif %}
+
+{% if click == "" %}
+    <div10 class = "alignment">
+    Read the instructions carefully<br>
+    <ul style="list-style-type:circle;" >
+        <li>You can attemt the quiz multiple times and your answers will be stored in your profile</li>
+        <li>The questions will be displayed one by one.</li>
+        <li>once you take test you will not be allowed to go back</li>
+        <li>you are not allowed to visit previous question once you clicked next button</li>
+        <li>Correct answer will be displayed after selecting the answer</li>
+       
+        
+    </ul>    
+    </div10>
+    
+{% endif %}
+
+
+
+<div10 class = "alignment">
+    <a>{{ques.1}}</a><br>
+<a>{{ques.question}}</a>
+{% for qu in ques %}
+
+    
+    <a>{{qu.questionno}}.{{qu.question}}</a><br>
+    
+    <input type= "radio" onclick = "myfunction()" name = "optio"  value = "{{qu.option1}}" required> <a>{{qu.option1}}</a><br>
+    <input type= "radio"  onclick = "myfunction()" name="optio" value="{{qu.option2}}" required> <a>{{qu.option2}}</a><br>
+    <input type= "radio" onclick = "myfunction()" name="optio" value="{{qu.option3}}" required> <a>{{qu.option3}}</a><br>
+    <input type= "radio" onclick = "myfunction()" name="optio" value="{{qu.option4}}" required> <a>{{qu.option4}}</a><br>
+    <input type= "hidden" id = "ans" name="ans" value="{{qu.answer}}">
+    <input type = "hidden" value = "2" name = "id">
+    <input type = "hidden" id = "demo1" name = "selected_answer">    
+    
+{% endfor %}
+    <input type = "hidden" value = "{{click}}" name="click"><br>
+    <a id = "demo" style = "color:green;"></a>
+    <a id = "demo4" style = "color:red;"></a>
+    
+    <input type = "hidden" value = "{{click2}}" name="click2">
+    <input type = "hidden" value = "some" name="id">
+    <input type = "hidden" value = "{{mark}}" name = "mark">
+    <input type = "hidden" value = "{{username}}" name = "username">
+    <input type = "hidden" name = "qnocount" value = "{{qnocount}}">
+</div10>
+    <div15 style = "text-align:center;">
+    {% if click2 != NONE %}
+        {% if click2 == qnocount %}
+            
+            <input type = "submit" class = "butt" value = "finish test" name = "finish test">
+        
+        {% else %} 
+            <input type = "submit" class = "butt" value = "next" name = "next">
+        {% endif %}
+    {% else %}
+        <input type = "submit" class = "butt" value = "next" name = "next">
+    {% endif %}
+    </div15>
+
+<script>
+var mark = 0;
+function myfunction() {
+  var x = document.getElementById("ans").value;
+  var ele = document.getElementsByName("optio");
+  
+
+  for (i=0;i<ele.length;i++){
+      if(ele[i].checked) 
+      var ans = ele[i].value;
+      ele[i].disabled="True";
+        
+  }
+  if(x == ans){
+        document.getElementById("demo").innerHTML = "Correct Answer " + x;
+
+  }
+  else{
+      document.getElementById("demo4").innerHTML = "wrong answer ,Correct answer is: " + x;
+  }
+
+document.getElementById("demo1").value = ans;  
+}
+
+window.history.forward(); 
+  function noBack() { 
+  window.history.forward(); 
+  } 
+
+</script>
+
+
+</form>
+
+</body>
+</html>

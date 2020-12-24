@@ -1,0 +1,17 @@
+.leftside, .rightside{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.leftside{
+    text-align: center;
+    background-color:aliceblue
+
+
+
+}
+.rightside{
+    text-align: center;
+    background-color:aliceblue;
+}

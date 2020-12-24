@@ -1,0 +1,82 @@
+{% load static %}
+<html>
+
+<body class = "color">
+<a href = "{% url 'index' %}">HOME</a>
+<style>
+.color{
+    background-color:aliceblue;
+}
+</style>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+
+#panel, .flip {
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  color: black;
+  margin: auto;
+  background-color:aliceblue;
+}
+</style>
+
+<div class = "row">
+<div class = "col-sm-6">
+{% comment %} <h3 class="flip" onclick="myFunction()">Create new questions</h3> {% endcomment %}
+<script>
+function myFunction() {
+  document.getElementById("panel").style.display = "block";
+}
+</script>
+
+
+{% for st in stu %}
+    <input type = "hidden" value = "{{st.name}}">
+{% endfor %}
+
+<br>
+<div id = "panel">
+
+{% for i in list1 %}
+  <a href = {% url 'dele' p=i %}><p>quiz {{i}}</p></a>
+  
+  
+{% endfor %} 
+<h5>{{s}}</h5>
+<a href = "{% url 'newquiz'%}"><input type = "submit" value = "create new quiz"></a>
+
+
+</div>
+</div>
+</form>
+
+<div class = "col-sm-6">
+
+<h3>creating new student </h3><br><br>
+<form action="/getData3/" method="POST">
+{% csrf_token %}
+<input type="text" name="sname2" placeholder="enter the name" value = "" ><br><br>
+<input type="password" name="spassword2" placeholder="enter the password" value ="" ><br><br>
+<input type="submit" value="register" name="submit"><br><br>
+</form>
+<h3>{{ mes }}</h3>
+<div>
+    {% for message in messages %}
+    <h3> {{message}} </h3>
+    {% endfor %}
+</div>
+</div>
+</form>
+
+</div>
+<br><br>
+</div>
+
+</body>
+
+</html>

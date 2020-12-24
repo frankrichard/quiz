@@ -1,0 +1,19 @@
+<html>
+{% for i in q %}
+    
+    <a>{{forloop.counter}}) {{i.question}}?</a><br>
+    <a>a.{{i.option1}}</a>
+    <a>b.{{i.option2}}</a>
+    <a>c.{{i.option3}}</a>
+    <a>d.{{i.option4}}</a>
+    <a>answer {{i.answer}}</a><br><br>
+    
+    
+{% endfor %}
+
+
+<a href = {% url 'delete' s=no %}><p>delete</p></a>
+
+  
+    
+</html>
